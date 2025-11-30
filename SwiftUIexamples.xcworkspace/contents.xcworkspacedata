@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:EnvironmentObjectEx/EnvironmentObjectEx.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:GridViewExample/GridViewExample.xcodeproj">
    </FileRef>
    <FileRef

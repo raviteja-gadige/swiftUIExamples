@@ -6,45 +6,40 @@
 //
 
 import SwiftUI
+import Combine
 
 
-struct DetailView: View {
+class CounterClass: ObservableObject {
+    @Published var counter: Int = 0
+}
+
+struct ContentView: View {
+    
     var body: some View {
-        Text("Detail Screen")
-            .navigationTitle("Details")
+        ChildView()
+            .environmentObject(CounterClass())
     }
 }
 
-
-struct ContentView: View {
+struct ChildView: View {
+    
+    @EnvironmentObject var counterClass:CounterClass
+    
     var body: some View {
         VStack {
-            Image("Profile")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 200)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                .shadow(radius: 7)
+            Text("Count = \(counterClass.counter)")
                 .padding()
             Button(action: {
-                 print("Button Pressed")
-               }, label: {
-                 Text("Press Me!")
-                   .font(.largeTitle)
-                   .foregroundColor(.white)
-               })
-               .padding()
-               .background(
-                 LinearGradient(gradient: Gradient(colors: [.purple, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing)
-               )
-               .cornerRadius(10)
+                counterClass.counter += 1
+            }, label: {
+                Text("Counter")
+            })
         }
     }
 }
 
-struct ContentView_previews: PreviewProvider {
-   static var previews: some View {
+struct ContentView_previews : PreviewProvider {
+    static var previews: some View  {
         ContentView()
     }
 }
