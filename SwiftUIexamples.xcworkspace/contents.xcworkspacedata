@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "absolute:/Users/apple/Documents/GridViewExample/GridViewExample.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ViewClippingExample/ViewClippingExample.xcodeproj">
    </FileRef>
    <FileRef
