@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "absolute:/Users/apple/Documents/BindingExample/BindingExample.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "absolute:/Users/apple/Documents/GridViewExample/GridViewExample.xcodeproj">
+      location = "group:GridViewExample/GridViewExample.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:ViewClippingExample/ViewClippingExample.xcodeproj">
