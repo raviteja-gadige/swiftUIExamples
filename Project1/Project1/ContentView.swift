@@ -8,19 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State private var isSelected = false
-
+    @StateObject var vm = ViewModel()
+    
   var body: some View {
-    Button(action: {
-      isSelected.toggle()
-    }) {
-      Image("Profile")
-        .renderingMode(.template)
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 200, height: 200)
-        .foregroundColor(isSelected ? .brown : .gray)
-    }
+        NavigationView {
+          List(vm.posts, id: \.id) { post in
+              VStack(alignment: .leading) {
+                  Text(post.title)
+                      .font(.headline)
+                  Text(post.body)
+                      .font(.body)
+                      .foregroundColor(.gray)
+              }
+          }
+          .onAppear() {
+              vm.fetchPosts()
+          }
+          .navigationTitle("Posts")
+      }
   }
 }
 
