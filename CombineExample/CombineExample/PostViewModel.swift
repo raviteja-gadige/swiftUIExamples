@@ -19,7 +19,7 @@ class PostViewModel: ObservableObject {
     // Published property to notify view of data changes
     @Published var posts: [Post] = []
     
-    private var cancellable: AnyCancellable?
+    private var cancellable = Set<AnyCancellable>()
     
     init() {
         fetchPosts()
@@ -31,8 +31,7 @@ class PostViewModel: ObservableObject {
         
         guard let url = URL(string: urlString) else { return }
         
-        // Create a URLSession data task publisher
-        cancellable = URLSession.shared.dataTaskPublisher(for: url)
+        let subscription = URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data) // Extract data from response
             .decode(type: [Post].self, decoder: JSONDecoder()) // Decode JSON into array of Posts
             .replaceError(with: []) // Replace errors with an empty array
@@ -40,5 +39,6 @@ class PostViewModel: ObservableObject {
             .sink(receiveValue: { [weak self] fetchedPosts in
                 self?.posts = fetchedPosts // Update posts with fetched data
             })
+        subscription.store(in: &cancellable)
     }
 }
