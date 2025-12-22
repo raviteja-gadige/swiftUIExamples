@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-@main
+@main // App entry point
 struct Project1App: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        WindowGroup // App window
+        {
+            ContentView() // First screen
         }
     }
 }

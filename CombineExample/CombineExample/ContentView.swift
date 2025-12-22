@@ -9,22 +9,25 @@ import SwiftUI
 
 // SwiftUI ContentView displaying fetched data
 struct ContentView: View {
-    @ObservedObject var viewModel = PostViewModel()
+    @StateObject var vm = PostViewModel()
     
-    var body: some View {
+  var body: some View {
         NavigationView {
-            List(viewModel.posts, id: \.id) { post in
-                VStack(alignment: .leading) {
-                    Text(post.title)
-                        .font(.headline)
-                    Text(post.body)
-                        .font(.body)
-                        .foregroundColor(.gray)
-                }
-            }
-            .navigationTitle("Posts")
-        }
-    }
+          List(vm.posts, id: \.id) { post in
+              VStack(alignment: .leading) {
+                  Text(post.title)
+                      .font(.headline)
+                  Text(post.body)
+                      .font(.body)
+                      .foregroundColor(.gray)
+              }
+          }
+          .onAppear() {
+              vm.fetchPosts()
+          }
+          .navigationTitle("Posts")
+      }
+  }
 }
 
 // Preview
