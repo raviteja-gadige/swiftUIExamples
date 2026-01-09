@@ -12,7 +12,7 @@ struct Project1App: App {
     var body: some Scene {
         WindowGroup // App window
         {
-            ContentView() // First screen
+            IncidentListView() // First screen
         }
     }
 }
